@@ -94,7 +94,7 @@ public class Biblioteca {
 		try {
 			System.out.println("Estos son los libros disponibles para devolver");
 			libros.values().stream().filter(l -> l.prestado() == true).map(l -> l.toString())
-			.forEach(System.out::println);
+					.forEach(System.out::println);
 			System.out.println("Introduzca el código del libro que desea llevarse: ");
 			int num = sc.nextInt();
 			Libro l = libros.get(num);
@@ -126,7 +126,8 @@ public class Biblioteca {
 				cuentaPrestados();
 				break;
 			case 5:
-				publicacionesAnteriores();break;
+				publicacionesAnteriores();
+				break;
 			case 6:
 				exit();
 			}
