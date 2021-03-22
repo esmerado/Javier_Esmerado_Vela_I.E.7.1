@@ -59,8 +59,8 @@ public class Pinturas extends Obra {
 	/**
 	 * Método muestra.
 	 */
-	public void muestra() {
-		toString();
+	public String muestra() {
+		return toString();
 	}
 
 	@Override

@@ -1,11 +1,13 @@
 package ejercicio4;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Scanner;
 
 import javax.lang.model.element.Element;
+import javax.sound.midi.Soundbank;
 import javax.swing.text.AbstractDocument.BranchElement;
 
 import org.w3c.dom.ls.LSOutput;
@@ -60,26 +62,30 @@ public class Catalogo {
 	 * método de addObra.
 	 */
 	private void addPintura() {
-		System.out.println("Introduce el titulo de la pintura: ");
-		String titulo = sc.nextLine();
-		sc.nextLine();
-		System.out.println("Introduce el número de inventario: ");
-		int numInve = sc.nextInt();
-		System.out.println("Introduce el nombre del autor; ");
-		String autor = sc.nextLine();
-		sc.nextLine();
-		System.out.println("Introduce el año de creación de la escultura: ");
-		String ano = sc.nextLine();
-		System.out.println("Introduce la superficie de la pintura: ");
-		double superficie = sc.nextDouble();
-		System.out.println("Introduce el tipo de soporte: ");
-		String soporte = sc.next();
+		try {
+			System.out.println("Introduce el titulo de la pintura: ");
+			String titulo = sc.nextLine();
+			sc.nextLine();
+			System.out.println("Introduce el número de inventario: ");
+			int numInve = sc.nextInt();
+			System.out.println("Introduce el nombre del autor; ");
+			String autor = sc.nextLine();
+			sc.nextLine();
+			System.out.println("Introduce el año de creación de la escultura: ");
+			String ano = sc.nextLine();
+			System.out.println("Introduce la superficie de la pintura: ");
+			double superficie = sc.nextDouble();
+			System.out.println("Introduce el tipo de soporte: ");
+			String soporte = sc.next();
 
-		if (pinturas.containsKey(numInve)) {
-			System.out.println("Esta obra ya está añadida.");
-		} else {
-			pinturas.put(numInve, new Pinturas(titulo, numInve, autor, ano, superficie, soporte));
-			System.out.println("Escultura añadida con éxito.");
+			if (pinturas.containsKey(numInve)) {
+				System.out.println("Esta obra ya está añadida.");
+			} else {
+				pinturas.put(numInve, new Pinturas(titulo, numInve, autor, ano, superficie, soporte));
+				System.out.println("Escultura añadida con éxito.");
+			}
+		} catch (Exception e) {
+			System.err.println("[ERROR]: Ha introducido algún valor erróneo.");
 		}
 	}
 
@@ -89,26 +95,30 @@ public class Catalogo {
 	 * método de addObra.
 	 */
 	private void addEscultura() {
-		System.out.println("Introduce el titulo de la escultura: ");
-		String titulo = sc.nextLine();
-		sc.nextLine();
-		System.out.println("Introduce el número de inventario: ");
-		int numInve = sc.nextInt();
-		System.out.println("Introduce el nombre del autor; ");
-		String autor = sc.nextLine();
-		sc.nextLine();
-		System.out.println("Introduce el año de creación de la escultura: ");
-		String ano = sc.nextLine();
-		System.out.println("Introduce el material de la escultura: ");
-		String material = sc.next();
-		System.out.println("Introduce la altura de la escultura");
-		double altura = sc.nextDouble();
+		try {
+			System.out.println("Introduce el titulo de la escultura: ");
+			String titulo = sc.nextLine();
+			sc.nextLine();
+			System.out.println("Introduce el número de inventario: ");
+			int numInve = sc.nextInt();
+			System.out.println("Introduce el nombre del autor; ");
+			String autor = sc.nextLine();
+			sc.nextLine();
+			System.out.println("Introduce el año de creación de la escultura: ");
+			String ano = sc.nextLine();
+			System.out.println("Introduce el material de la escultura: ");
+			String material = sc.next();
+			System.out.println("Introduce la altura de la escultura");
+			double altura = sc.nextDouble();
 
-		if (esculturas.containsKey(numInve)) {
-			System.out.println("Esta obra ya está añadida.");
-		} else {
-			esculturas.put(numInve, new Escultura(titulo, numInve, autor, ano, material, altura));
-			System.out.println("Escultura añadida con éxito.");
+			if (esculturas.containsKey(numInve)) {
+				System.out.println("Esta obra ya está añadida.");
+			} else {
+				esculturas.put(numInve, new Escultura(titulo, numInve, autor, ano, material, altura));
+				System.out.println("Escultura añadida con éxito.");
+			}
+		} catch (Exception e) {
+			System.err.println("[ERROR]: Ha introducido algún valor erróneo.");
 		}
 	}
 
@@ -183,6 +193,7 @@ public class Catalogo {
 	 * Método para mostrar las esculturas.
 	 */
 	public void showEscultura() {
+		System.out.println("--Esculturas--");
 		esculturas.values().stream().forEach(System.out::println);
 	}
 
@@ -190,6 +201,7 @@ public class Catalogo {
 	 * Método para mostrar las pinturas.
 	 */
 	public void showPinturas() {
+		System.out.println("--Pinturas--");
 		pinturas.values().stream().forEach(System.out::println);
 	}
 
@@ -204,10 +216,10 @@ public class Catalogo {
 		int num = sc.nextInt();
 		if (esculturas.containsKey(num)) {
 			Escultura e = esculturas.get(num);
-			e.muestra();
+			System.out.println(e.muestra());
 		} else if (pinturas.containsKey(num)) {
 			Pinturas p = pinturas.get(num);
-			p.muestra();
+			System.out.println(p.muestra());
 		} else {
 			System.err.println("[ERROR]: El número introducido no coincide con ninguna obra.");
 		}
@@ -230,13 +242,54 @@ public class Catalogo {
 		System.out.println("La suma total de las superficies es: ");
 		return pinturas.values().stream().mapToDouble(l -> l.getSuperficie()).sum();
 	}
-	
+
 	/**
 	 * Método de unión.
 	 */
 	public void acceso() {
+		do {
+			menu();
+			int num = sc.nextInt();
+			switch (num) {
+			case 1:
+				addObra();
+				break;
+			case 2:
+				removeObra();
+				break;
+			case 3:
+				showObras();
+				break;
+			case 4:
+				searchObra();
+				break;
+			case 5:
+				System.out.println(superficie());
+				break;
+			case 6:
+				masAlta();
+				break;
+			default:
+				exit();
+				break;
+			}
+		} while (true);
+	}
+
+	private void menu() {
 		System.out.println("--->BIENVENIDO<---");
 		System.out.println("Qué acción desea realizar: ");
-		// TODO: falta realizar la unión final.
+		System.out.println("1.- Añadir obra.");
+		System.out.println("2.- Eliminar obra.");
+		System.out.println("3.- Ver obras.");
+		System.out.println("4.- Buscar obra.");
+		System.out.println("5.- Superficie.");
+		System.out.println("6.- Más alta.");
+		System.out.println("7.- Salir");
+	}
+
+	public void showObras() {
+		showEscultura();
+		showPinturas();
 	}
 }
