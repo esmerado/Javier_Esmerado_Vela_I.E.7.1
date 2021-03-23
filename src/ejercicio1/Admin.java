@@ -1,3 +1,4 @@
+
 package ejercicio1;
 
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class Admin extends Usuario {
 	public void setnBaneos(int nBaneos) {
 		this.nBaneos = nBaneos;
 	}
-	
+
 	// Cambiamos el nick del administrador
 	public void cambiarNick() {
 		String nNick = null;
@@ -49,12 +50,8 @@ public class Admin extends Usuario {
 
 	@Override
 	public String toString() {
-		return "email: " + getEmail() + "nick: " + getNick() + "mensajes: " + getMensajes() + "pepelera: " + getPapelera() + "nBaneos: " + nBaneos;
+		return "email: " + getEmail() + "nick: " + getNick() + "mensajes: " + getMensajes() + "pepelera: "
+				+ getPapelera() + "nBaneos: " + nBaneos;
 	}
-	
-	
-	
-	
-
 
 }
