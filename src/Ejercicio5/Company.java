@@ -35,7 +35,6 @@ public class Company {
 		case 1:
 			addEmpleadoAsalariado();
 			break;
-
 		case 2:
 			addEmpleadoPorHoras();
 			break;
