@@ -19,7 +19,12 @@ public class Alumno {
 	public Alumno(String dni, String nombre) {
 		this.dni = dni;
 		this.nombre = nombre;
-		this.cursosRealizados = cursosRealizados;
+	}
+	
+	public Alumno(String dni, String nombre, Double saldo) {
+		this.dni = dni;
+		this.nombre = nombre;
+		this.saldo = saldo;
 	}
 
 	public Double getSaldo() {

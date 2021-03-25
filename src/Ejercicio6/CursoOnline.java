@@ -27,7 +27,11 @@ public class CursoOnline extends Curso {
 	public void inscribirse(Alumno alumno) {
 		List lista = alumno.cursosRealizados.values().stream().map(l -> l.getTitulo()).collect(Collectors.toList());
 		if (lista.containsAll(cursosRequeridos)) {
-			
+			alumno.cursosMatriculado.put(getTitulo(), this);
+			this.alumnos.put(alumno.getDni(), alumno);
+			System.out.println("Alumno inscrito con éxito.");
+		}else {
+			System.err.println("[ERROR]: No cumple los requisitos.");
 		}
 	}
 
